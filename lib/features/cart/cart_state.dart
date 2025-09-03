@@ -10,10 +10,17 @@ class CartState {
   Dough? dough;
   final List<Drink> drinks = [];
 
+  Address? address;
+  PaymentMethod? paymentMethod;
+  double cashChange = 0.0;
+
+  String? lastOrderId;
+  bool? lastPaymentSuccess;
+
   double get total {
     final f = flavors.fold<double>(0, (s, e) => s + e.price);
-    final c = (crust?.price ?? 0);
-    final d = (dough?.price ?? 0);
+    final c = crust?.price ?? 0;
+    final d = dough?.price ?? 0;
     final dr = drinks.fold<double>(0, (s, e) => s + e.price);
     return f + c + d + dr;
   }
@@ -23,5 +30,8 @@ class CartState {
     crust = null;
     dough = null;
     drinks.clear();
+    address = null;
+    paymentMethod = null;
+    cashChange = 0;
   }
 }
